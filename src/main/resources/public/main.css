@@ -1,0 +1,18 @@
+a{
+    padding-left: 30px;
+    text-align: center;
+}
+
+h1{
+    padding-top: 30px;
+}
+
+#margen{
+    margin: 30px 80em 60px 10px;
+    background-color: gray;
+    border: 1px solid black;
+}
+
+code{
+    color: deeppink;
+}

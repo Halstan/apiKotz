@@ -13,12 +13,16 @@ public class knight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id_knight;
+
     @NotNull
     @Column(length = 50)
     private String name;
 
     @Column(length = 50)
     private String constellation;
+
+    @Column(length = 120)
+    private String url_photo;
 
     @Column(length = 50)
     private String hability1;

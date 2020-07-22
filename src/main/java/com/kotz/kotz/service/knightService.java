@@ -15,8 +15,24 @@ public class knightService {
     @Autowired
     private knightRepository knightRepository;
 
+    public knight addKnight(knight knight){
+        return knightRepository.save(knight);
+    }
+
     public List<knight> findAll(){
         return knightRepository.findAll();
+    }
+
+    public List<knight> findByGod(String name){
+        return knightRepository.findKnightByGod(name);
+    }
+
+    public List<knight> findByArmor(String armor){
+        return knightRepository.findKnightByArmor(armor);
+    }
+
+    public knight randomKnight(){
+        return knightRepository.getRandomKnight();
     }
 
     public knight findById (Long id){
