@@ -20,4 +20,5 @@ public class typeArmor {
     @OneToMany(mappedBy = "armor")
     @JsonIgnoreProperties("armor")
     private List<knight> knig = new ArrayList<>();
+
 }

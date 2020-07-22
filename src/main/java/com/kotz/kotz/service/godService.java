@@ -18,4 +18,8 @@ public class godService {
     public List<god> findAll(){
         return godRepository.findAll();
     }
+
+     public god addGod(god god){
+        return godRepository.save(god);
+     }
 }

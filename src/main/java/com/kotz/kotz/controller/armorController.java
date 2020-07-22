@@ -3,9 +3,9 @@ package com.kotz.kotz.controller;
 import com.kotz.kotz.entity.typeArmor;
 import com.kotz.kotz.service.armorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +20,15 @@ public class armorController {
         this.armorService = armorService;
     }
 
-    @GetMapping()
+    @GetMapping(produces = "application/json")
     public List<typeArmor> findAll(){
         return armorService.findAll();
+    }
+
+    @PostMapping(consumes = "application/json", produces="application/json")
+    public ResponseEntity addArmor(@RequestBody typeArmor armor){
+        typeArmor armorCreated = armorService.addArmor(armor);
+        return new ResponseEntity(armorCreated, HttpStatus.CREATED);
     }
 
 }

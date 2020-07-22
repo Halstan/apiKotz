@@ -3,9 +3,9 @@ package com.kotz.kotz.controller;
 import com.kotz.kotz.entity.god;
 import com.kotz.kotz.service.godService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +20,15 @@ public class godController {
         this.godService = godService;
     }
 
-    @GetMapping()
+    @GetMapping(produces = "application/json")
     public List<god> getAll(){
         return godService.findAll();
+    }
+
+    @PostMapping(consumes = "application/json", produces="application/json")
+    public ResponseEntity addGod(@RequestBody god god){
+        god godCreated = godService.addGod(god);
+        return new ResponseEntity(godCreated, HttpStatus.CREATED);
     }
 
 }

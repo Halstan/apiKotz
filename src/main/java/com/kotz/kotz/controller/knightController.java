@@ -25,7 +25,7 @@ public class knightController {
         return knightService.findAll();
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json", produces="application/json")
     public ResponseEntity addKnight(@RequestBody knight knight){
         knight knightCreated = knightService.addKnight(knight);
         return new ResponseEntity(knightCreated, HttpStatus.CREATED);

@@ -19,4 +19,8 @@ public class armorService {
         return armorRepository.findAll();
     }
 
+    public typeArmor addArmor(typeArmor armor){
+        return armorRepository.save(armor);
+    }
+
 }

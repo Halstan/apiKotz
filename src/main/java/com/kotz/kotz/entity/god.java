@@ -18,6 +18,9 @@ public class god {
     @Column(length = 30, nullable = false)
     private String name;
 
+    @Column(length = 130)
+    private String url_photo;
+
     @OneToMany (mappedBy = "god")
     @JsonIgnoreProperties("god")
     private List<knight> knight = new ArrayList<>();
