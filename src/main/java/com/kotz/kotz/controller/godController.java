@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/dioses")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class godController {
 
     private final godService godService;

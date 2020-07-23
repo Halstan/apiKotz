@@ -15,7 +15,7 @@ public class god {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_god;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 30, nullable = false, unique = true)
     private String name;
 
     @Column(length = 130)
