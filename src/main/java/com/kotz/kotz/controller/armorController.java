@@ -23,12 +23,12 @@ public class armorController {
 
     @GetMapping(produces = "application/json")
     public List<typeArmor> findAll(){
-        return armorService.findAll();
+        return this.armorService.findAll();
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
     public ResponseEntity addArmor(@RequestBody typeArmor armor){
-        typeArmor armorCreated = armorService.addArmor(armor);
+        typeArmor armorCreated = this.armorService.addArmor(armor);
         return new ResponseEntity(armorCreated, HttpStatus.CREATED);
     }
 

@@ -23,12 +23,12 @@ public class godController {
 
     @GetMapping(produces = "application/json")
     public List<god> getAll(){
-        return godService.findAll();
+        return this.godService.findAll();
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
     public ResponseEntity addGod(@RequestBody god god){
-        god godCreated = godService.addGod(god);
+        god godCreated = this.godService.addGod(god);
         return new ResponseEntity(godCreated, HttpStatus.CREATED);
     }
 

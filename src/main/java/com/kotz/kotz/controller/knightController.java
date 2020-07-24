@@ -27,7 +27,7 @@ public class knightController {
 
     @GetMapping(produces = "application/json")
     public List<knight> getAll(){
-        return knightService.findAll();
+        return this.knightService.findAll();
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
@@ -45,7 +45,7 @@ public class knightController {
 
         try{
             if(error.isEmpty()){
-                knight knightCreated = knightService.addKnight(knight);
+                knight knightCreated = this.knightService.addKnight(knight);
                 if (knight.getArmor().getId_armor() == 5){
                     resp.put("message", "El espectro " + knight.getName() + " de " + knight.getConstellation() + " ha sido registrado");
                 }else if(knight.getArmor().getId_armor() == 4){
@@ -72,17 +72,17 @@ public class knightController {
 
     @GetMapping(value = "/dios/{name}", produces = "application/json")
     public List<knight> getKnightByGod(@PathVariable String name){
-        return knightService.findByGod(name);
+        return this.knightService.findByGod(name);
     }
 
     @GetMapping(value = "/armadura/{armor}", produces = "application/json")
     public List<knight> getKnightByArmor(@PathVariable String armor){
-        return knightService.findByArmor(armor);
+        return this.knightService.findByArmor(armor);
     }
 
     @GetMapping(value = "/ramdon", produces = "application/json")
     public knight getRandomKnight(){
-        return knightService.randomKnight();
+        return this.knightService.randomKnight();
     }
 
 }
