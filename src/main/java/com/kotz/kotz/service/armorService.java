@@ -12,15 +12,19 @@ import java.util.List;
 @Transactional
 public class armorService {
 
-    @Autowired
     private armorRepository armorRepository;
 
+    @Autowired
+    public armorService(armorRepository armorRepository) {
+        this.armorRepository = armorRepository;
+    }
+
     public List<typeArmor> findAll(){
-        return armorRepository.findAll();
+        return this.armorRepository.findAll();
     }
 
     public typeArmor addArmor(typeArmor armor){
-        return armorRepository.save(armor);
+        return this.armorRepository.save(armor);
     }
 
 }

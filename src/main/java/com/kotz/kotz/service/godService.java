@@ -12,14 +12,18 @@ import java.util.List;
 @Transactional
 public class godService {
 
-    @Autowired
     private godRepository godRepository;
 
+    @Autowired
+    public godService(godRepository godRepository) {
+        this.godRepository = godRepository;
+    }
+
     public List<god> findAll(){
-        return godRepository.findAll();
+        return this.godRepository.findAll();
     }
 
      public god addGod(god god){
-        return godRepository.save(god);
+        return this.godRepository.save(god);
      }
 }

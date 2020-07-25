@@ -12,30 +12,34 @@ import java.util.List;
 @Transactional
 public class knightService {
 
-    @Autowired
     private knightRepository knightRepository;
 
+    @Autowired
+    public knightService(knightRepository knightRepository) {
+        this.knightRepository = knightRepository;
+    }
+
     public knight addKnight(knight knight){
-        return knightRepository.save(knight);
+        return this.knightRepository.save(knight);
     }
 
     public List<knight> findAll(){
-        return knightRepository.findAll();
+        return this.knightRepository.findAll();
     }
 
     public List<knight> findByGod(String name){
-        return knightRepository.findKnightByGod(name);
+        return this.knightRepository.findKnightByGod(name);
     }
 
     public List<knight> findByArmor(String armor){
-        return knightRepository.findKnightByArmor(armor);
+        return this.knightRepository.findKnightByArmor(armor);
     }
 
     public knight randomKnight(){
-        return knightRepository.getRandomKnight();
+        return this.knightRepository.getRandomKnight();
     }
 
     public knight findById (Long id){
-        return knightRepository.findById(id).get();
+        return this.knightRepository.findById(id).get();
     }
 }
