@@ -27,9 +27,9 @@ public class armorController {
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity addArmor(@RequestBody typeArmor armor){
+    public ResponseEntity<?> addArmor(@RequestBody typeArmor armor){
         typeArmor armorCreated = this.armorService.addArmor(armor);
-        return new ResponseEntity(armorCreated, HttpStatus.CREATED);
+        return new ResponseEntity<>(armorCreated, HttpStatus.CREATED);
     }
 
 }

@@ -27,9 +27,9 @@ public class godController {
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity addGod(@RequestBody god god){
+    public ResponseEntity<?> addGod(@RequestBody god god){
         god godCreated = this.godService.addGod(god);
-        return new ResponseEntity(godCreated, HttpStatus.CREATED);
+        return new ResponseEntity<>(godCreated, HttpStatus.CREATED);
     }
 
 }
