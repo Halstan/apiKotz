@@ -1,0 +1,29 @@
+a{
+    padding-left: 40px;
+    text-align: center;
+}
+
+h1{
+    padding-top: 45px;
+    text-align: center;
+}
+
+h5, p{
+    padding-left: 40px;
+}
+
+#margen{
+    margin: 40px 80em 60px 10px;
+    background-color: gray;
+    border: 1px solid black;
+}
+
+.link{
+    background-color: #6fcaff;
+    border: 1px;
+    margin: 40px 80em 60px 10px;
+}
+
+/*.link{
+    padding-bottom: 15px;
+}*/

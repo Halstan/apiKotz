@@ -80,7 +80,7 @@ public class knightController {
         return this.knightService.findByArmor(armor);
     }
 
-    @GetMapping(value = "/ramdon", produces = "application/json")
+    @GetMapping(value = "/random", produces = "application/json")
     public knight getRandomKnight(){
         return this.knightService.randomKnight();
     }
