@@ -9,3 +9,4 @@ Api for the video game Kotz: Awakening
 - `/caballeros/random` Muestra cualquier caballero al azar.
 - `/caballeros/armadura/{armor}` Muestra a todos los caballeros que usen tal armadura.
 - `/caballeros/dios/{god}` Muestra a todos los caballeros que esten con tal dios.
+- `/caballeros/{id}` Muestra a un caballero por si Id.
