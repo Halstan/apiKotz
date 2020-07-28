@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public class armorService {
 
-    private armorRepository armorRepository;
+    private final armorRepository armorRepository;
 
     @Autowired
     public armorService(armorRepository armorRepository) {

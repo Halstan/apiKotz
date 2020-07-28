@@ -1,6 +1,7 @@
 package com.kotz.kotz.controller;
 
 import com.kotz.kotz.entity.knight;
+import com.kotz.kotz.exception.apiRequestException;
 import com.kotz.kotz.service.knightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.http.HTTPException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,9 +67,12 @@ public class knightController {
             resp.put("Errors", error);
             return new ResponseEntity<>(resp, HttpStatus.NOT_ACCEPTABLE);
         }
-
-
         return new ResponseEntity<>(resp, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "{id}", produces = "application/json")
+    public knight getKnightById(@PathVariable Long id){
+        return this.knightService.findById(id);
     }
 
     @GetMapping(value = "/dios/{name}", produces = "application/json")
