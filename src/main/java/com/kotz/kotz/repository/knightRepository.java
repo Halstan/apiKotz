@@ -19,8 +19,8 @@ public interface knightRepository extends JpaRepository<knight, Long> {
             "knight INNER JOIN type_armor on knight.armor_id_armor = type_armor.id_armor where type_armor.name_armor = :armor", nativeQuery = true)
     List<knight> findKnightByArmor(@Param("armor") String armor);
 
-    @Query(value = "SELECT * FROM knight ORDER BY random() LIMIT 1", nativeQuery = true)
-    //@Query(value = "SELECT * FROM knight ORDER BY rand() LIMIT 1", nativeQuery = true)
+    //@Query(value = "SELECT * FROM knight ORDER BY random() LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM knight ORDER BY rand() LIMIT 1", nativeQuery = true)
     knight getRandomKnight();
 
 }
