@@ -1,7 +1,9 @@
 package com.kotz.kotz.controller;
 
+import com.kotz.kotz.dto.knightDTO;
 import com.kotz.kotz.entity.knight;
-import com.kotz.kotz.exception.apiRequestException;
+import com.kotz.kotz.mapper.knightMapper;
+import com.kotz.kotz.mapper.knightMapperImpl;
 import com.kotz.kotz.service.knightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -9,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.http.HTTPException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class knightController {
 
+    private final knightMapper knightMapper = new knightMapperImpl();
     private final knightService knightService;
 
     @Autowired
@@ -28,17 +30,17 @@ public class knightController {
     }
 
     @GetMapping(produces = "application/json")
-    public List<knight> getAll(){
-        return this.knightService.findAll();
+    public ResponseEntity<List<knightDTO>> getAll(){
+        return ResponseEntity.ok(knightMapper.toKnightDTOs(this.knightService.findAll()));
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity<?> addKnight(@RequestBody knight knight){
+    public ResponseEntity<knightDTO> addKnight(@RequestBody knightDTO knight){
         Map<String, Object> resp = new HashMap<>();
         List<String> error = new ArrayList<>();
 
-        if (knight.getConstellation().isEmpty()) error.add("La constelacion no puede estar vacia");
-        if (knight.getName().isEmpty()) error.add("El nombre no puede estar vacio");
+        if (knight.getConstellation().isEmpty()) error.add("La constelación no puede estar vacia");
+        if (knight.getName().isEmpty()) error.add("El nombre no puede estar vacío");
         if (knight.getUrl_photo().isEmpty()) error.add("La foto no puede estar vacia");
         if (knight.getHability1().isEmpty()) error.add("La habilidad no puede estar vacia");
         if (knight.getHability2().isEmpty()) error.add("La habilidad no puede estar vacia");
@@ -47,47 +49,43 @@ public class knightController {
 
         try{
             if(error.isEmpty()){
-                knight knightCreated = this.knightService.addKnight(knight);
-                if (knight.getArmor().getId_armor() == 5){
-                    resp.put("message", "El espectro " + knight.getName() + " de " + knight.getConstellation() + " ha sido registrado");
-                }else if(knight.getArmor().getId_armor() == 4){
-                    resp.put("message", "El general marino " + knight.getName() + " de " + knight.getConstellation() + " ha sido registrado");
-                }else {
-                    resp.put("message", "El caballero " + knight.getName() + " de " + knight.getConstellation() + " ha sido registrado");
-                }
-                //resp.put("Knight", knightCreated);
+                this.knightService.addKnight(knightMapper.toKnight(knight));
             }else{
-                resp.put("message", "Se encontraron campos vacios");
+                resp.put("message", "Se encontraron campos vacíos");
                 resp.put("Errors", error);
-                return new ResponseEntity<>(resp, HttpStatus.NOT_ACCEPTABLE);
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
             }
 
         }catch (DataAccessException exception){
             resp.put("message", "Error al registrar");
             resp.put("Errors", error);
-            return new ResponseEntity<>(resp, HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         }
-        return new ResponseEntity<>(resp, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(knight);
     }
 
     @GetMapping(value = "{id}", produces = "application/json")
-    public knight getKnightById(@PathVariable Long id){
-        return this.knightService.findById(id);
+    public ResponseEntity<knightDTO> getKnightById(@PathVariable Long id){
+        knight knight = this.knightService.findById(id);
+        return ResponseEntity.ok(knightMapper.toKnightDTO(knight));
     }
 
     @GetMapping(value = "/dios/{name}", produces = "application/json")
-    public List<knight> getKnightByGod(@PathVariable String name){
-        return this.knightService.findByGod(name);
+    public ResponseEntity<List<knightDTO>> getKnightByGod(@PathVariable String name){
+        List<knight> knight = this.knightService.findByGod(name);
+        return ResponseEntity.ok(knightMapper.toKnightDTOs(knight));
     }
 
     @GetMapping(value = "/armadura/{armor}", produces = "application/json")
-    public List<knight> getKnightByArmor(@PathVariable String armor){
-        return this.knightService.findByArmor(armor);
+    public ResponseEntity<List<knightDTO>> getKnightByArmor(@PathVariable String armor){
+        List<knight> knight = this.knightService.findByArmor(armor);
+        return ResponseEntity.ok(knightMapper.toKnightDTOs(knight));
     }
 
     @GetMapping(value = "/random", produces = "application/json")
-    public knight getRandomKnight(){
-        return this.knightService.randomKnight();
+    public ResponseEntity<knightDTO> getRandomKnight(){
+        knight knight = this.knightService.randomKnight();
+        return ResponseEntity.ok(knightMapper.toKnightDTO(knight));
     }
 
 }

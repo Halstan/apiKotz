@@ -1,6 +1,8 @@
 package com.kotz.kotz.controller;
 
-import com.kotz.kotz.entity.typeArmor;
+import com.kotz.kotz.dto.armorDTO;
+import com.kotz.kotz.mapper.armorMapper;
+import com.kotz.kotz.mapper.armorMapperImpl;
 import com.kotz.kotz.service.armorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import java.util.List;
 @RequestMapping(value = "armaduras")
 public class armorController {
 
+    private final armorMapper armorMapper = new armorMapperImpl();
+
     private final armorService armorService;
 
     @Autowired
@@ -22,14 +26,14 @@ public class armorController {
     }
 
     @GetMapping(produces = "application/json")
-    public List<typeArmor> findAll(){
-        return this.armorService.findAll();
+    public ResponseEntity<List<armorDTO>> findAll(){
+        return ResponseEntity.ok(armorMapper.toArmorDTOs(this.armorService.findAll()));
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity<?> addArmor(@RequestBody typeArmor armor){
-        typeArmor armorCreated = this.armorService.addArmor(armor);
-        return new ResponseEntity<>(armorCreated, HttpStatus.CREATED);
+    public ResponseEntity<armorDTO> addArmor(@RequestBody armorDTO armorDTO){
+        this.armorService.addArmor(armorMapper.toArmor(armorDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(armorDTO);
     }
 
 }

@@ -1,6 +1,9 @@
 package com.kotz.kotz.controller;
 
+import com.kotz.kotz.dto.godDTO;
 import com.kotz.kotz.entity.god;
+import com.kotz.kotz.mapper.godMapper;
+import com.kotz.kotz.mapper.godMapperImpl;
 import com.kotz.kotz.service.godService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,20 +19,28 @@ public class godController {
 
     private final godService godService;
 
+    private final godMapper godMapper = new godMapperImpl();
+
     @Autowired
     public godController(godService godService) {
         this.godService = godService;
     }
 
     @GetMapping(produces = "application/json")
-    public List<god> getAll(){
-        return this.godService.findAll();
+    public ResponseEntity<List<godDTO>> getAll(){
+        return ResponseEntity.ok(godMapper.toGodDTOs(this.godService.findAll()));
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity<?> addGod(@RequestBody god god){
-        god godCreated = this.godService.addGod(god);
-        return new ResponseEntity<>(godCreated, HttpStatus.CREATED);
+    public ResponseEntity<godDTO> addGod(@RequestBody godDTO godDTO){
+        this.godService.addGod(godMapper.toGod(godDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(godDTO);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<godDTO> findGod(@PathVariable Long id){
+        god god = this.godService.findById(id);
+        return ResponseEntity.ok(godMapper.toGodDTO(god));
     }
 
 }
