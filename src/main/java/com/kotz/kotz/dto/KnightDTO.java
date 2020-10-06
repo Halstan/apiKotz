@@ -3,7 +3,7 @@ package com.kotz.kotz.dto;
 import lombok.Data;
 
 @Data
-public class knightDTO {
+public class KnightDTO {
 
     private long Id_knight;
 
@@ -21,8 +21,8 @@ public class knightDTO {
 
     private String hability4;
 
-    private armorDTO armor;
+    private ArmorDTO armor;
 
-    private godDTO god;
+    private GodDTO god;
 
 }

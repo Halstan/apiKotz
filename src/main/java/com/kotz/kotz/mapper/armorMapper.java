@@ -1,7 +1,7 @@
 package com.kotz.kotz.mapper;
 
-import com.kotz.kotz.dto.armorDTO;
-import com.kotz.kotz.entity.typeArmor;
+import com.kotz.kotz.dto.ArmorDTO;
+import com.kotz.kotz.entity.TypeArmor;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface armorMapper {
 
-    typeArmor toArmor(armorDTO armorDTO);
+    TypeArmor toArmor(ArmorDTO armorDTO);
 
-    List<armorDTO> toArmorDTOs(List<typeArmor> armors);
+    List<ArmorDTO> toArmorDTOs(List<TypeArmor> armors);
 
-    armorDTO toArmorDTO(typeArmor typeArmor);
+    ArmorDTO toArmorDTO(TypeArmor typeArmor);
 
 }

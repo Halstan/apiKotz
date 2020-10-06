@@ -1,7 +1,7 @@
 package com.kotz.kotz.service;
 
-import com.kotz.kotz.entity.typeArmor;
-import com.kotz.kotz.repository.armorRepository;
+import com.kotz.kotz.entity.TypeArmor;
+import com.kotz.kotz.repository.ArmorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,20 +10,20 @@ import java.util.List;
 
 @Service
 @Transactional
-public class armorService {
+public class ArmorService {
 
-    private final armorRepository armorRepository;
+    private final ArmorRepository armorRepository;
 
     @Autowired
-    public armorService(armorRepository armorRepository) {
+    public ArmorService(ArmorRepository armorRepository) {
         this.armorRepository = armorRepository;
     }
 
-    public List<typeArmor> findAll(){
+    public List<TypeArmor> findAll(){
         return this.armorRepository.findAll();
     }
 
-    public typeArmor addArmor(typeArmor armor){
+    public TypeArmor addArmor(TypeArmor armor){
         return this.armorRepository.save(armor);
     }
 

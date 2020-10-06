@@ -1,7 +1,7 @@
 package com.kotz.kotz.mapper;
 
-import com.kotz.kotz.dto.knightDTO;
-import com.kotz.kotz.entity.knight;
+import com.kotz.kotz.dto.KnightDTO;
+import com.kotz.kotz.entity.Knight;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface knightMapper {
 
-    knight toKnight(knightDTO knightDTO);
+    Knight toKnight(KnightDTO knightDTO);
 
-    List<knightDTO> toKnightDTOs (List<knight> knights);
+    List<KnightDTO> toKnightDTOs (List<Knight> Knights);
 
-    knightDTO toKnightDTO(knight knight);
+    KnightDTO toKnightDTO(Knight knight);
 
 }

@@ -16,17 +16,37 @@
 <div class="col-xs-1 center-block">
 
     <code>
-        <h2 id="documentation"><a href="/swagger-ui.html">Documentación</a></h2>
-    </code>
-
-    <p>Muestra todos los tipos de armaduras:</p>
-    <code>
-        <a href="/armaduras" target="_blank" title="Muestra todas la armaduras">/armaduras</a><br /><br />
+        <h2 id="documentation"><a href="/swagger-ui.html" target="_blank">Documentación</a></h2>
     </code>
 
     <p>Muestra todos los caballeros:</p>
     <code>
         <a href="/caballeros" target="_blank" title="Muestra todos los caballeros">/caballeros</a><br /><br />
+    </code>
+
+    <p>Muestra todos los caballeros con tal armadura:</p>
+    <p>Ejemplo:<a href="/caballeros/armadura/Oro" target="_blank">/caballeros/armadura/Oro</a></p>
+    <code>
+        <a href="/caballeros/armadura/" target="_blank" title="Muestra todos los caballeros con tal armadura">/caballeros/armadura/{armor}</a><br /><br />
+    </code>
+
+    <p>Muestra todos los caballeros el cual su nombre empiece con los caracteres dados:</p>
+    <p> Ejemplo:<a href="/caballeros/nombre/s" target="_blank">/caballeros/nombre/s</a></p>
+
+    <code>
+        <a href="/caballeros/nombre/" target="_blank" title="Muestra todos los caballeros el cual su nombre empiece con los caracteres dados">/caballeros/nombre/{name}</a><br /><br />
+    </code>
+
+    <p>Muestra todos los caballeros con tal dios:</p>
+    <p> Ejemplo:<a href="/caballeros/dios/Athena" target="_blank">/caballeros/dios/Athena</a></p>
+
+    <code>
+        <a href="/caballeros/dios/" target="_blank" title="Muestra todos los caballeros con tal dios">/caballeros/dios/{god}</a><br /><br />
+    </code>
+
+    <p>Muestra todos los tipos de armaduras:</p>
+    <code>
+        <a href="/armaduras" target="_blank" title="Muestra todas la armaduras">/armaduras</a><br /><br />
     </code>
 
     <p>Muestra un caballero al azar:</p>
@@ -43,19 +63,6 @@
     <p>Muestra todos los dioses:</p>
     <code>
         <a href="/dioses" target="_blank" title="Muestra todos los dioses">/dioses</a><br /><br />
-    </code>
-
-    <p>Muestra todos los caballeros con tal armadura:</p>
-    <p>Ejemplo:<a href="/caballeros/armadura/Oro" target="_blank">/caballeros/armadura/Oro</a></p>
-    <code>
-        <a href="/caballeros/armadura/" target="_blank" title="Muestra todos los caballeros con tal armadura">/caballeros/armadura/{armor}</a><br /><br />
-    </code>
-
-    <p>Muestra todos los caballeros con tal dios:</p>
-    <p> Ejemplo:<a href="/caballeros/dios/Athena" target="_blank">/caballeros/dios/Athena</a></p>
-
-    <code>
-        <a href="/caballeros/dios/" target="_blank" title="Muestra todos los caballeros con tal dios">/caballeros/dios/{god}</a><br /><br />
     </code>
 
     <h5>Insertar caballero</h5>

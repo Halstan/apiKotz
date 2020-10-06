@@ -1,9 +1,8 @@
 package com.kotz.kotz.service;
 
-import com.kotz.kotz.entity.god;
+import com.kotz.kotz.entity.God;
 import com.kotz.kotz.exception.apiRequestException;
-import com.kotz.kotz.repository.godRepository;
-import io.swagger.annotations.Api;
+import com.kotz.kotz.repository.GodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +11,24 @@ import java.util.List;
 
 @Service
 @Transactional
-public class godService {
+public class GodService {
 
-    private godRepository godRepository;
+    private GodRepository godRepository;
 
     @Autowired
-    public godService(godRepository godRepository) {
+    public GodService(GodRepository godRepository) {
         this.godRepository = godRepository;
     }
 
-    public List<god> findAll(){
+    public List<God> findAll(){
         return this.godRepository.findAll();
     }
 
-    public god addGod(god god){
+    public God addGod(God god){
         return this.godRepository.save(god);
      }
 
-     public god findById(Long id){
+     public God findById(Long id){
         return this.godRepository.findById(id).orElseThrow(() -> new apiRequestException("Este dios aun no despierta"));
      }
 }

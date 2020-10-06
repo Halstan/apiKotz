@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-public class knight {
+public class Knight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +37,8 @@ public class knight {
     private String hability4;
 
     @ManyToOne
-    @JsonIgnoreProperties("knig")
-    private typeArmor armor;
+    private TypeArmor armor;
 
     @ManyToOne
-    @JsonIgnoreProperties("knight")
-    private god god;
+    private God god;
 }

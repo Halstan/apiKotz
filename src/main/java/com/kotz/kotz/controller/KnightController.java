@@ -1,10 +1,10 @@
 package com.kotz.kotz.controller;
 
-import com.kotz.kotz.dto.knightDTO;
-import com.kotz.kotz.entity.knight;
+import com.kotz.kotz.dto.KnightDTO;
+import com.kotz.kotz.entity.Knight;
 import com.kotz.kotz.mapper.knightMapper;
 import com.kotz.kotz.mapper.knightMapperImpl;
-import com.kotz.kotz.service.knightService;
+import com.kotz.kotz.service.KnightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -19,23 +19,23 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/caballeros")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-public class knightController {
+public class KnightController {
 
     private final knightMapper knightMapper = new knightMapperImpl();
-    private final knightService knightService;
+    private final KnightService knightService;
 
     @Autowired
-    public knightController(knightService knightService) {
+    public KnightController(KnightService knightService) {
         this.knightService = knightService;
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseEntity<List<knightDTO>> getAll(){
+    public ResponseEntity<List<KnightDTO>> getAll(){
         return ResponseEntity.ok(knightMapper.toKnightDTOs(this.knightService.findAll()));
     }
 
     @PostMapping(consumes = "application/json", produces="application/json")
-    public ResponseEntity<knightDTO> addKnight(@RequestBody knightDTO knight){
+    public ResponseEntity<KnightDTO> addKnight(@RequestBody KnightDTO knight){
         Map<String, Object> resp = new HashMap<>();
         List<String> error = new ArrayList<>();
 
@@ -65,27 +65,34 @@ public class knightController {
     }
 
     @GetMapping(value = "{id}", produces = "application/json")
-    public ResponseEntity<knightDTO> getKnightById(@PathVariable Long id){
-        knight knight = this.knightService.findById(id);
+    public ResponseEntity<KnightDTO> getKnightById(@PathVariable Long id){
+        Knight knight = this.knightService.findById(id);
         return ResponseEntity.ok(knightMapper.toKnightDTO(knight));
     }
 
     @GetMapping(value = "/dios/{name}", produces = "application/json")
-    public ResponseEntity<List<knightDTO>> getKnightByGod(@PathVariable String name){
-        List<knight> knight = this.knightService.findByGod(name);
+    public ResponseEntity<List<KnightDTO>> getKnightByGod(@PathVariable String name){
+        List<Knight> knight = this.knightService.findByGod(name);
         return ResponseEntity.ok(knightMapper.toKnightDTOs(knight));
     }
 
     @GetMapping(value = "/armadura/{armor}", produces = "application/json")
-    public ResponseEntity<List<knightDTO>> getKnightByArmor(@PathVariable String armor){
-        List<knight> knight = this.knightService.findByArmor(armor);
+    public ResponseEntity<List<KnightDTO>> getKnightByArmor(@PathVariable String armor){
+        List<Knight> knight = this.knightService.findByArmor(armor);
         return ResponseEntity.ok(knightMapper.toKnightDTOs(knight));
     }
 
     @GetMapping(value = "/random", produces = "application/json")
-    public ResponseEntity<knightDTO> getRandomKnight(){
-        knight knight = this.knightService.randomKnight();
+    public ResponseEntity<KnightDTO> getRandomKnight(){
+        Knight knight = this.knightService.randomKnight();
         return ResponseEntity.ok(knightMapper.toKnightDTO(knight));
+    }
+
+    @GetMapping(value = "/nombre/{name}", produces = "application/json")
+    public ResponseEntity<List<KnightDTO>> getKnightsByName(@PathVariable String name){
+        List<Knight> knights = this.knightService.getKnightsByName(name);
+
+        return ResponseEntity.ok(knightMapper.toKnightDTOs(knights));
     }
 
 }

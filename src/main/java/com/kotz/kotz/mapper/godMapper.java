@@ -1,21 +1,18 @@
 package com.kotz.kotz.mapper;
 
-import com.kotz.kotz.dto.godDTO;
-import com.kotz.kotz.dto.knightDTO;
-import com.kotz.kotz.entity.god;
-import com.kotz.kotz.entity.knight;
+import com.kotz.kotz.dto.GodDTO;
+import com.kotz.kotz.entity.God;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper
 public interface godMapper {
 
-    god toGod(godDTO godDTO);
+    God toGod(GodDTO godDTO);
 
-    List<godDTO> toGodDTOs(List<god> gods);
+    List<GodDTO> toGodDTOs(List<God> Gods);
 
-    godDTO toGodDTO(god god);
+    GodDTO toGodDTO(God god);
 
 }

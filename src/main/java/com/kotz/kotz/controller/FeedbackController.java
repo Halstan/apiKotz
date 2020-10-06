@@ -1,39 +1,39 @@
 package com.kotz.kotz.controller;
 
-import com.kotz.kotz.entity.feedback;
-import com.kotz.kotz.mail.mailConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kotz.kotz.entity.Feedback;
+import com.kotz.kotz.mail.MailConfig;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.bind.ValidationException;
 
 @Controller
 @RequestMapping("/feedback")
-public class feedbackController {
+public class FeedbackController {
 
-    private mailConfig mailConfig;
+    private MailConfig mailConfig;
 
 
-    public feedbackController(mailConfig mailConfig) {
+    public FeedbackController(MailConfig mailConfig) {
         this.mailConfig = mailConfig;
     }
 
     @GetMapping
     public ModelAndView getFeedback(){
-        //mailConfig newmail = new mailConfig();
-        //model.addAttribute("feedback", newmail);
+        //MailConfig newmail = new MailConfig();
+        //model.addAttribute("Feedback", newmail);
         return new ModelAndView("mail");
     }
 
 
     @PostMapping
-    public String postFeedback(feedback feedback, BindingResult bindingResult) throws ValidationException {
+    public String postFeedback(Feedback feedback, BindingResult bindingResult) throws ValidationException {
 
         if(bindingResult.hasErrors()){
             throw new ValidationException("Mail no valido");
@@ -48,7 +48,7 @@ public class feedbackController {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(feedback.getEmail());
-        mailMessage.setTo("e@feedback.com");
+        mailMessage.setTo("e@Feedback.com");
         mailMessage.setSubject("Nuevo mensaje de: " + feedback.getName());
         mailMessage.setText(feedback.getMessage());
 
